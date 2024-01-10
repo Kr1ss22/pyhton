@@ -10,10 +10,10 @@ import datetime
 fail = open("nimekiri.txt", encoding ="utf-8")
 
 p = (datetime.datetime.now().day)
- nr = 1
+nr = 1
 for rida in fail:
     if nr==p:
-    jrk = int(input("\tahvli ette tuleb::"))
+        jrk = int(input("\tahvli ette tuleb::"))
     nr+=1
 
 
