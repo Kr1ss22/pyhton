@@ -13,7 +13,7 @@ p = (datetime.datetime.now().day)
 nr = 1
 for rida in fail:
     if nr==p:
-        jrk = int(input("\tahvli ette tuleb::"))
+        jrk = int(input("tahvli ette tuleb:"))
     nr+=1
 
 """"
@@ -27,7 +27,7 @@ for rida in fail:
     nr+=1
 fail.seek(0)
 nr = 1
-jrk = int(input("\nValike laulu järjekorrda number:"))
+jrk = int(input("\nValige laulu järjekorrda number:"))
 fail.seek(jrk)
 for rida in fail:
     if nr==jrk:
