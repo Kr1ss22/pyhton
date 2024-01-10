@@ -16,20 +16,6 @@ for rida in fail:
         jrk = int(input("\tahvli ette tuleb::"))
     nr+=1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 """"
 #jukebox
 failinimi = input("Palun sisestage failinimi: ")
