@@ -1,0 +1,6 @@
+tekst = (input ("Lisa tekst : "))
+
+
+
+
+
