@@ -55,7 +55,7 @@ a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 new_list = []
 for i in a: new_list.append(i) if 1<20 else 0
 print(new_list)
-exit()
+
 
 #6 Koosta programm, mis kontrollib, kas kasutaja poolt sisestatud arv on paaris vĆµi paaritu
 	# kuvatakse korrektne arusaadav kĆ¼simus ja vastus - 1p
@@ -63,6 +63,17 @@ exit()
 	# kood mis teavitab paaris vĆµi paaritust arvust - 1p
 	# kuvatakse programmi pealkiri - 1p
 	# kood kommenteeritud - 1p
+
+kasutaja_arv = int(input("Sisesta arv: "))
+
+if kasutaja_arv == 0:
+    print("Sisestasid nulli. Palun sisesta mõni muu arv.")
+elif kasutaja_arv % 2 == 0:
+    print("Sisestatud arv on paaris.")
+else:
+    print("Sisestatud arv on paaritu.")
+
+
 
 
 
