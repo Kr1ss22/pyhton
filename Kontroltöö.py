@@ -51,10 +51,14 @@ leia_suurem_väiksem_summa_keskmine(vanused)
 	# # Ask the user for a number and return a list that contains only elements from the original list a that are smaller than that number given by the user. 1p
 	
 a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
-
-new_list = []
-for i in a: new_list.append(i) if 1<20 else 0
-print(new_list)
+def vähem_kui_viis():
+    new_list = []
+    for i in a: new_list.append(i) if i < 5 else None
+    print (new_list)
+    print(a)
+    add = int(input("Sisesta number: "))
+    a.append(add)
+    vähem_kui_viis()
 
 
 #6 Koosta programm, mis kontrollib, kas kasutaja poolt sisestatud arv on paaris vĆµi paaritu
