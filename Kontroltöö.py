@@ -123,51 +123,51 @@ else:
         summa = int(input("Sisestage summa eurodes: "))
         print(summa*15.6466, "krooni")
     def eek_eur():
-    summa = int(input("Sisestage summa kroonides: "))
-print(summa/15.6466, "eur")
+        summa = int(input("Sisestage summa kroonides: "))  
+        print(summa/15.6466, "eur")
 
 valik = input("Kas soovite teisendada Eurosid[EUR] või Kroone[EEK]: ")
 if valik == "EUR":
                     eur_eek()
-                elif valik == "EEK":
+elif valik == "EEK":
                     eek_eur()
-                else:    
-                        print("Vale valik!")
+else:    
+                     print("Vale valik!")
 
     # 14 Palkade vÃµrdlus - Loo palk.txt fail tÃ¶Ã¶tajate nime, soo ja palganumbriga (10 tÃ¶Ã¶tajat).
 	#Koosta programm, mis analÃ¼Ã¼sib kas firmas toimub diskrimineerimist soo jÃ¤rgi. Selleks vÃµrdle omavahel meeste ja naiste palkade keskmiseid, samuti meeste ja naiste kÃµige kÃµrgemat palka. Programm peab tegema otsuse.
      
-        def palgad():
-         fail = open("palgad.txt", encoding="UTF-8")
-            mehed = []
-            naised = []
-            for rida in fail:
+def palgad():
+        fail = open("palgad.txt", encoding="UTF-8")
+        mehed = []
+        naised = []
+        for rida in fail:
                 osad = rida.split()
                 if osad[2] == "m":
                     mehed.append(int(osad[3]))
                 else:
-                    naised.append(int(osad[3]))
-            fail.close()
-            meeste_keskmine = sum(mehed)/len(mehed)
-            meeste_max = max(mehed)
-            naiste_keskmine = sum(naised)/len(naised)
-            naiste_max = max(naised)
-            print("Meeste keskmine palk on", meeste_keskmine)
-            print("Naiste keskmine palk on", naiste_keskmine)
-            print("Meeste kõrgeim palk on", meeste_max)
-            print("Naiste kõrgeim palk on", naiste_max)
-            if meeste_keskmine > naiste_keskmine and meeste_max > naiste_max:
-                print("Firmas toimub diskrimineerimist soo järgi")
-            else:
-                print("Firmas ei toimu diskrimineerimist soo järgi")
+                        naised.append(int(osad[3]))
+                fail.close()
+                meeste_keskmine = sum(mehed)/len(mehed)
+                meeste_max = max(mehed)
+                naiste_keskmine = sum(naised)/len(naised)
+                naiste_max = max(naised)
+                print("Meeste keskmine palk on", meeste_keskmine)
+                print("Naiste keskmine palk on", naiste_keskmine)
+                print("Meeste kõrgeim palk on", meeste_max)
+                print("Naiste kõrgeim palk on", naiste_max)
+                if meeste_keskmine > naiste_keskmine and meeste_max > naiste_max:
+                    print("Firmas toimub diskrimineerimist soo järgi")
+                else:
+                    print("Firmas ei toimu diskrimineerimist soo järgi")
 
-            palgad()
+                palgad()
 
 # 16. TÃ¤ringud
 # 	Kasutaja vÃµistleb kahe tÃ¤ringuga arvuti vastu. Kasutaja teeb pakkumise ning suurima tÃ¤ringupunktisumma vÃµitja saab laual oleva raha endale juurde. MÃ¤ng kestab kuni kummalgi on raha otsas.
 # 	(Vihjed: kÃ¼si kasutajalt nime, kuva pidevalt konto seisu ja tÃ¤ringuviskeid, kasutajate raha hulga mÃ¤ngu alguses mÃ¤Ã¤rad sina)
      
-                def taringu_mang():
+def taringu_mang():
                 raha = 100
                 arvuti_raha = 100
                 nimi = input("Sisesta oma nimi: ")
@@ -178,19 +178,22 @@ if valik == "EUR":
                     if panus > raha:
                         print("Sul ei ole nii palju raha!")
                         continue
-                    enter = input("Vajuta enterit, et täringuid veeretada.")
-                    taring = random.randint(1,6)
-                    print("Sul tuli", taring, "silma.")
-                    arvuti_taring = random.randint(1,6)
-                    print("Arvutil tuli", arvuti_taring, "silma.")
-                    if taring > arvuti_taring:
-                        print("Sina võitsid!")
-                        raha += panus
-                        arvuti_raha -= panus
-                    elif taring < arvuti_taring:
-                        print("Arvuti võitis!")
-                        raha -= panus
-                        arvuti_raha += panus
-                    else:
-                        print("Viik!")  
-                        taringu_mang()
+                enter = input("Vajuta enterit, et täringuid veeretada.")
+                taring = random.randint(1,6)
+                print("Sul tuli", taring, "silma.")
+            
+                arvuti_taring = random.randint(1,6)
+                print("Arvutil tuli", arvuti_taring, "silma.")
+                if taring > arvuti_taring:
+                            print("Sina võitsid!")
+                            raha += panus
+                            arvuti_raha -= panus
+                elif taring < arvuti_taring:
+                            print("Arvuti võitis!")
+                raha -= panus
+                arvuti_raha += panus
+                else:
+                print("Viik!")  
+                            
+                
+                taringu_mang()
