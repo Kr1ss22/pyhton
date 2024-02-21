@@ -6,7 +6,6 @@ from datetime import datetime
 services_file = 'services.csv'
 invoices_file = 'invoices.csv'
 
-# Eeldame, et failides on päised juba olemas
 def load_data(filename):
     data = []
     try:
@@ -15,7 +14,7 @@ def load_data(filename):
             for row in reader:
                 data.append(row)
     except FileNotFoundError:
-        open(filename, "w").close()  # Loob tühja faili, kui seda ei eksisteeri
+        open(filename, "w").close()
     return data
 
 def save_data(filename, data, fieldnames):
@@ -49,7 +48,7 @@ class Application(tk.Tk):
             widget.destroy()
         
         global services
-        services = load_data(services_file)  # Refresh the list by reloading data
+        services = load_data(services_file)
         for service in services:
             ttk.Label(self.service_window, text=f"{service['name']} - {service['price']}").pack()
         
@@ -72,12 +71,49 @@ class Application(tk.Tk):
             messagebox.showwarning("Tühistatud", "Teenus ei lisatud, sisend oli tühi või operatsioon tühistati.")
 
     def create_invoice(self):
-        # Define invoice creation UI here
-        pass
+        self.invoice_window = tk.Toplevel(self)
+        self.invoice_window.title("Koosta Arve")
+        self.invoice_window.geometry('400x300')
+
+        ttk.Label(self.invoice_window, text="Vali teenus:").pack()
+        self.service_var = tk.StringVar()
+        service_dropdown = ttk.Combobox(self.invoice_window, textvariable=self.service_var)
+        service_dropdown['values'] = [service['name'] for service in services]
+        service_dropdown['state'] = 'readonly'  # Don't allow user to type a value
+        service_dropdown.pack()
+
+        ttk.Label(self.invoice_window, text="Kuupäev:").pack()
+        self.date_var = tk.StringVar(value=datetime.now().strftime("%Y-%m-%d"))
+        ttk.Label(self.invoice_window, textvariable=self.date_var).pack()
+
+        ttk.Button(self.invoice_window, text="Salvesta Arve", command=self.save_invoice).pack(pady=10)
+        ttk.Button(self.invoice_window, text="Sulge", command=self.invoice_window.destroy).pack(pady=5)
+
+    def save_invoice(self):
+        selected_service = self.service_var.get()
+        invoice_date = self.date_var.get()
+        for service in services:
+            if service['name'] == selected_service:
+                new_invoice = {
+                    'id': str(len(invoices) + 1),
+                    'service': selected_service,
+                    'date': invoice_date,
+                    'amount': service['price']
+                }
+                invoices.append(new_invoice)
+                save_data(invoices_file, invoices, ['id', 'service', 'date', 'amount'])
+                messagebox.showinfo("Arve salvestatud", "Arve on edukalt salvestatud.")
+                self.invoice_window.destroy()
+                return
+        messagebox.showerror("Viga", "Valitud teenust ei leitud.")
 
     def view_invoices(self):
-        # Define invoice viewing logic here
-        pass
+        self.invoice_view_window = tk.Toplevel(self)
+        self.invoice_view_window.title("Vaata Arveid")
+        self.invoice_view_window.geometry('600x400')
+        
+        for invoice in invoices:
+            ttk.Label(self.invoice_view_window, text=f"Arve ID: {invoice['id']}, Teenus: {invoice['service']}, Kuupäev: {invoice['date']}, Summa: {invoice['amount']}").pack()
 
 if __name__ == "__main__":
     app = Application()
